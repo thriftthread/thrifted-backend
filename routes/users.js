@@ -13,3 +13,4 @@ router.post("/login", async (req, res) => {
 
   res.json({ userId: user._id, message: "Login success!" });
 });
+module.exports = router;
