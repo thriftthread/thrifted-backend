@@ -25,3 +25,5 @@ mongoose
   .catch((err) => {
     console.error("❌ MongoDB connection failed:", err.message);
   });
+const userRoutes = require("./routes/users");
+app.use("/api/user", userRoutes);
