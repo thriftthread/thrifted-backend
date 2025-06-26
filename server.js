@@ -27,3 +27,6 @@ mongoose
   });
 const userRoutes = require("./routes/users");
 app.use("/api/user", userRoutes);
+const userCartRoutes = require("./routes/userCart");
+app.use("/api/user", userCartRoutes);
+
