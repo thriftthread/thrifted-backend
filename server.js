@@ -30,3 +30,27 @@ mongoose.connect(process.env.MONGO_URI)
   .catch((err) => {
     console.error("❌ MongoDB connection failed:", err.message);
   });
+const User = require("../models/User"); // at the top if not already there
+
+// ✅ POST /api/user/save
+router.post("/save", async (req, res) => {
+  try {
+    const { uid, phone } = req.body;
+
+    if (!uid || !phone) {
+      return res.status(400).json({ message: "Missing UID or phone number" });
+    }
+
+    let user = await User.findOne({ uid });
+
+    if (!user) {
+      user = new User({ uid, phone });
+      await user.save();
+    }
+
+    res.status(201).json({ message: "✅ User saved", user });
+  } catch (err) {
+    console.error("❌ Error saving user:", err);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+});
